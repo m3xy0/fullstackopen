@@ -1,0 +1,3 @@
+diagram.md
+new note in Single page app diagram.md
+spa diagram.md
