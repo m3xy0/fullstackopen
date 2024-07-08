@@ -48,11 +48,11 @@ const App = () => {
 
   return (
     <>
+    <h1>Web developmnt curriculum</h1>
     <Course course={courses[0]} />
     <Course course={courses[1]} />
     </>
   )
-
 }
 
 export default App

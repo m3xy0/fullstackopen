@@ -8,9 +8,9 @@ const Course = ({course}) => {
     )
   }
   
-  const Total = ({sum}) => <p>total of {sum} exercises</p>
+  const Total = ({sum}) => <h3>total of {sum} exercises</h3>
   
-  const Header = ({title}) => <h1>{title}</h1>
+  const Header = ({title}) => <h2>{title}</h2>
   
   const Part = ({part}) => <p>{part.name} {part.exercises}</p>
   
