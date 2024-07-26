@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
@@ -29,7 +28,15 @@ const App = () => {
     } 
 
     if(persons.some(person => person.name === nameObject.name)) {
-      alert(`${newName} is already added to phonebook`)
+      if(confirm(`${newName} is already added to phonebook, replace the old number\nwith a new one?`)) {
+        phoneListService
+        .revisePhoneNumber(persons.find(person => person.name === nameObject.name).id, nameObject)
+        .then(revisedPhoneNumber => {
+          setPersons(persons.map(person => person.id === revisedPhoneNumber.id ? revisedPhoneNumber : person))
+          setNewName('')
+          setNewNumber('')
+        })
+      }
     }
     else{
       phoneListService

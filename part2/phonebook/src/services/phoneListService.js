@@ -16,4 +16,10 @@ const deletePhoneNumber = (uselessId) => {
     const request = axios.delete(`${baseUrl}/${uselessId}`)
     return request.then(response => response.data)
 }
-export default {getAllList, newPhoneNumber, deletePhoneNumber}
+
+const revisePhoneNumber = (revisedNumberId, nameObject) => {
+    const request = axios.put(`${baseUrl}/${revisedNumberId}`, nameObject)
+    return request.then(response => response.data)
+}
+
+export default {getAllList, newPhoneNumber, deletePhoneNumber, revisePhoneNumber}
