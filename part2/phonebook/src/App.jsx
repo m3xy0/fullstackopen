@@ -3,18 +3,19 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import phoneListService from './services/phoneListService'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterName, setFilterName] = useState('')
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     phoneListService
       .getAllList()
       .then(fullList => {
-        console.log(fullList)
         setPersons(fullList)
       })
   }, [])
@@ -33,6 +34,10 @@ const App = () => {
         .revisePhoneNumber(persons.find(person => person.name === nameObject.name).id, nameObject)
         .then(revisedPhoneNumber => {
           setPersons(persons.map(person => person.id === revisedPhoneNumber.id ? revisedPhoneNumber : person))
+          setMessage(`Revised phone number of ${revisedPhoneNumber.name}`)
+          setTimeout(() => {
+          setMessage(null)
+        }, 5000)
           setNewName('')
           setNewNumber('')
         })
@@ -43,6 +48,10 @@ const App = () => {
       .newPhoneNumber(nameObject)
       .then(returnedPhoneNumber => {
         setPersons(persons.concat(returnedPhoneNumber))
+        setMessage(`Added ${returnedPhoneNumber.name}`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
         setNewName('')
         setNewNumber('')
       })
@@ -53,8 +62,11 @@ const App = () => {
     phoneListService
       .deletePhoneNumber(id)
       .then(returnedPhoneNumber => {
-        console.log(returnedPhoneNumber);
         setPersons(persons.filter(person => person.id !== returnedPhoneNumber.id))
+        setMessage(`Deleted ${returnedPhoneNumber.name}`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
       })
   }
 
@@ -73,6 +85,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} />
       <Filter 
         filterName={filterName} 
         onChange={handleNameFilter} 
