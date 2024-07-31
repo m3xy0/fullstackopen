@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Country from './components/Country'
+import SearchedCountries from './components/SearchedCountries'
 
 
 function App() {
@@ -27,6 +28,11 @@ function App() {
     console.log(requestedCountry)
   },[searchQuery])
 
+
+  const handleClick = (name) => {
+    setSearchQuery(name)
+  }
+
   
 
   return (
@@ -34,9 +40,7 @@ function App() {
       <div>
         find countries <input type="search" onChange={handleChange}></input>
       </div>
-      <div>
-        {requestedCountry.length === 1 ? null : requestedCountry.length > 10 ? <p>Too many matches, specify another filter</p> : <ul>{requestedCountry.map(country => <li key={country.name.common}>{country.name.common}</li>)}</ul>}
-      </div>
+      <SearchedCountries requestedCountry={requestedCountry} handleClick={handleClick} />
       <Country oneCountry={oneCountry} />
     </>
   )
