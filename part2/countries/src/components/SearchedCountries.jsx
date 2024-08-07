@@ -8,7 +8,7 @@ const SearchedCountries = ({requestedCountry, handleClick}) => {
     if(requestedCountry.length === 1) {
       return null
     } 
-    else if (requestedCountry.length > 10) {
+    else if (requestedCountry.length > 10 ) {
       return (
       <p>Too many matches, specify another filter</p>
       )

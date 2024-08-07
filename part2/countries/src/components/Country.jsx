@@ -11,9 +11,14 @@ const Country = ({ oneCountry }) => {
             <p>area {oneCountry.area}</p>
             <h3>languages:</h3>
             <ul>
-                {languageKeys.map(key => <li id={key}>{oneCountry.languages[key]}</li>)}
+                {languageKeys.map(key => <li key={key}>{oneCountry.languages[key]}</li>)}
             </ul>
-            <img src={oneCountry.flags.svg} style={{width: "20%", height: "auto"}}></img>
+            <p>{oneCountry.flags.svg}</p>
+            <img
+                src={oneCountry.flags.svg}
+                alt={oneCountry.flags.alt}
+                style={{width: "20%", minWidth: "220px", height: "auto", border: "1px solid black"}}
+            />
         </div>
     )
 }
