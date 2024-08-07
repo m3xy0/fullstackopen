@@ -13,7 +13,6 @@ const Country = ({ oneCountry }) => {
             <ul>
                 {languageKeys.map(key => <li key={key}>{oneCountry.languages[key]}</li>)}
             </ul>
-            <p>{oneCountry.flags.svg}</p>
             <img
                 src={oneCountry.flags.svg}
                 alt={oneCountry.flags.alt}
